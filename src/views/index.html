@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Galacta Terminal</title>
+        <style>
+            body {
+                font-family: monospace;
+                background-color: black;
+                color: white;
+                padding: 20px;
+            }
+            h1,
+            h3 {
+                color: #00ff00; /* Green color for terminal style */
+            }
+            input {
+                width: 300px;
+                margin-right: 10px;
+            }
+            button {
+                padding: 5px 10px;
+                background-color: #005500;
+                color: white;
+                border: none;
+                cursor: pointer;
+            }
+            button:hover {
+                background-color: #007700;
+            }
+            #output {
+                white-space: pre;
+                line-height: 0.9;
+                height: 300px;
+                overflow-y: scroll;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Galacta Terminal</h1>
+        <p>
+            Galacta Terminal is a simple terminal emulator that allows you to
+            run commands on a remote server.
+        </p>
+        <button onclick="redirectToManual()">Manual</button>
+
+        <p id="output"></p>
+        <form action="/run" method="post">
+            <input
+                type="text"
+                name="command"
+                id="command"
+                placeholder="Enter a command"
+            />
+            <button type="submit">Run</button>
+            <button type="button" onclick="clearOutput()">Clear</button>
+        </form>
+
+        <script>
+            let typingInterval; // Variable to track the typing interval
+            let index = 0; // Current index for typing effect
+
+            // Start the terminal on load
+            fetch('/run/start', {
+                method: 'POST',
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    appendOutput(data.output);
+                });
+
+            const form = document.querySelector('form');
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const command = document.querySelector('#command').value;
+
+                // Construct the URL with the command
+                const url = `/run/${encodeURIComponent(command)}`; // Use encodeURIComponent to handle special characters
+
+                fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ command: command }), // Optional, if your server needs the command in the body
+                })
+                    .then((response) => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then((data) => {
+                        appendOutput(data.output);
+                    })
+                    .catch((error) => {
+                        console.error('Error:', error);
+                        appendOutput('Error: ' + error.message); // Add error message to the output
+                    });
+            });
+
+            const appendOutput = (output) => {
+                const outputElement = document.querySelector('#output');
+                const newOutput = output;
+                index = 0; // Reset index for the new output
+                outputElement.innerHTML += '\n'; // Add a new line before typing new output
+                typeWriterEffect(newOutput); // Call the typing effect with the new output
+
+                // Scroll to the bottom of the output area
+                outputElement.scrollTop = outputElement.scrollHeight;
+            };
+
+            const typeWriterEffect = (newOutput) => {
+                const outputElement = document.querySelector('#output');
+
+                const typeNextLetter = () => {
+                    if (index < newOutput.length) {
+                        outputElement.innerHTML += newOutput.charAt(index); // Append new character
+                        index++;
+                        typingInterval = setTimeout(typeNextLetter, 0.1); // Adjust delay for typing effect
+                    } else {
+                        outputElement.innerHTML += '\n'; // Add a new line after finishing the typing
+                    }
+                };
+
+                typeNextLetter(); // Start typing effect
+            };
+
+            const clearOutput = () => {
+                clearTimeout(typingInterval); // Stop the typing effect
+                index = 0; // Reset index
+                const outputElement = document.querySelector('#output');
+                outputElement.innerHTML = ''; // Clear the output area
+            };
+
+            const redirectToManual = () => {
+                window.location.href = '/manual';
+            };
+        </script>
+    </body>
+</html>

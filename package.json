@@ -1,0 +1,32 @@
+{
+    "name": "galacta",
+    "version": "1.0.0",
+    "description": "galacta terminal simulator",
+    "main": "server.js",
+    "scripts": {
+        "dev": "nodemon server.js",
+        "test": "mocha",
+        "start": "node server.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "galacta"
+    },
+    "keywords": [
+        "terminal",
+        "galacta",
+        "simulator",
+        "node"
+    ],
+    "author": "joão victor",
+    "license": "ISC",
+    "devDependencies": {
+        "chai": "^5.1.2",
+        "mocha": "^10.8.2",
+        "nodemon": "^3.1.7",
+        "sequelize": "^6.37.5"
+    },
+    "dependencies": {
+        "sqlite3": "^5.1.7"
+    }
+}

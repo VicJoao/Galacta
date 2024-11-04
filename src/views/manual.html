@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Terminal Simulator Manual</title>
+        <link rel="stylesheet" href="styles.css" />
+        <!-- Link to a CSS file if needed -->
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f4f4f4;
+                margin: 0;
+                padding: 20px;
+            }
+            h1,
+            h2 {
+                color: #333;
+            }
+            pre {
+                background-color: #eee;
+                padding: 10px;
+                border-left: 4px solid #333;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Terminal Simulator Manual</h1>
+
+        <p>
+            Welcome to the Terminal Simulator for managing your spaceship fleet!
+            Below you will find a list of commands you can use to interact with
+            the system.
+        </p>
+
+        <h2>Available Commands</h2>
+
+        <h3>Ship Management</h3>
+        <pre>
+createShip [fleetID] [arguments]
+    - Creates a new ship in the specified fleet.
+    - Arguments: name, capacity, maxSpeed, type, weaponSystems, frontalShield, lateralLeftShield, lateralRightShield, backShield, shieldType.
+
+listShips -a
+    - Lists all ships with their names and IDs.
+
+listShips -f [fleetID]
+    - Lists ships associated with the specified fleet.
+
+fetch [id]
+    - Fetches details of a ship or fleet by its ID.
+
+fetch -m [name]
+    - Fetches details of a ship model by its name.
+
+updateShip [fleetID] [shipID]
+    - Initiates a command line interface to update ship details.
+
+deleteShip [shipID]
+    - Deletes the specified ship from the system.
+    </pre
+        >
+
+        <h3>Fleet Management</h3>
+        <pre>
+listFleets
+    - Lists all fleets with their names, IDs, and generals.
+
+updateFleet [fleetID]
+    - Initiates a command line interface to update fleet details.
+
+deleteFleet [FleetID]
+    - Deletes the specified fleet from the system.
+    </pre
+        >
+
+        <h3>Ship Model Management</h3>
+        <pre>
+createShipModel [arguments]
+    - Creates a new ship model based on the provided arguments.
+
+listShipModels
+    - Lists all saved ship models.
+
+updateShipModel [arguments]
+    - Initiates a command line interface to update ship model details.
+
+deleteModel [ModelID]
+    - Deletes the specified ship model from the system.
+    </pre
+        >
+
+        <h2>Usage Examples</h2>
+        <p>Here are a few examples of how to use the commands:</p>
+        <pre>
+> createShip fleet123 "Battleship" 500 30 "warship" "laser" 30 30 20 20 "energy"
+> listShips -a
+> fetch 123456
+> deleteShip 123456
+    </pre
+        >
+
+        <h2>Notes</h2>
+        <ul>
+            <li>
+                Ensure that all required arguments are provided for each
+                command.
+            </li>
+            <li>
+                IDs are unique identifiers for ships and fleets; ensure no
+                duplicates exist.
+            </li>
+            <li>
+                Use the <code>fetch</code> command to view details before
+                updating or deleting.
+            </li>
+        </ul>
+
+        <h2>Support</h2>
+        <p>
+            If you encounter any issues or have questions, please refer to the
+            documentation or contact support.
+        </p>
+
+        <footer>
+            <p>&copy; 2024 Terminal Simulator. All rights reserved.</p>
+        </footer>
+    </body>
+</html>
