@@ -118,7 +118,7 @@
                     if (index < newOutput.length) {
                         outputElement.innerHTML += newOutput.charAt(index); // Append new character
                         index++;
-                        typingInterval = setTimeout(typeNextLetter, 0.1); // Adjust delay for typing effect
+                        typingInterval = setTimeout(typeNextLetter, 0); // Adjust delay for typing effect
                     } else {
                         outputElement.innerHTML += '\n'; // Add a new line after finishing the typing
                     }

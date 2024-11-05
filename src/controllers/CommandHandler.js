@@ -12,51 +12,74 @@ class CommandHandler {
     }
 
     async handleCommand(command) {
+        command = decodeURIComponent(command);
         const [cmd, ...args] = command.split(' ');
-
         try {
             switch (cmd) {
+                case 'createFleet':
+                    if (args.length < 3)
+                        return 'Usage: createFleet <name> <general> <maxCapacity>';
+                    return await this.fleetManager.createFleet(args);
                 case 'createShip':
-                    return await this.shipManager.createShip(args); // Return the response
+                    if (args.length < 4)
+                        return 'Usage: createShip <name> <type> <fleetId> <modelId>';
+                    return await this.shipManager.createShip(args);
                 case 'listShips':
-                    return await this.shipManager.listShips(args); // Return the response
+                    return await this.shipManager.listShips(args);
                 case 'listFleets':
-                    return await this.fleetManager.listFleets(); // Return the response
+                    const response = await this.fleetManager.listFleets();
+                    console.log(response);
+                    return response;
                 case 'fetch':
-                    return await this.fetch(args); // Return the response
+                    if (args.length < 2) return 'Usage: fetch <id> <type>';
+                    return await this.fetch(args);
                 case 'updateShip':
-                    return await this.shipManager.updateShip(args); // Return the response
+                    if (args.length < 3)
+                        return 'Usage: updateShip <id> <attribute> <value>';
+                    return await this.shipManager.updateShip(args);
                 case 'updateFleet':
-                    return await this.fleetManager.updateFleet(args); // Return the response
+                    if (args.length < 3)
+                        return 'Usage: updateFleet <id> <attribute> <value>';
+                    console.log(args);
+                    return await this.fleetManager.updateFleet(args);
                 case 'createShipModel':
-                    return await this.shipModelManager.createShipModel(args); // Return the response
+                    if (args.length < 6)
+                        return 'Usage: createShipModel <name> <type> <frontalShield> <lateralLeftShield> <lateralRightShield> <backShield> <shieldType>';
+                    return await this.shipModelManager.createShipModel(args);
                 case 'updateShipModel':
-                    return await this.shipModelManager.updateShipModel(args); // Return the response
+                    if (args.length < 3)
+                        return 'Usage: updateShipModel <id> <attribute> <value>';
+                    return await this.shipModelManager.updateShipModel(args);
                 case 'createShipFromModel':
-                    return await this.shipManager.createShipFromModel(args); // Return the response
+                    if (args.length < 3)
+                        return 'Usage: createShipFromModel <name> <fleetId> <modelId>';
+                    return await this.shipManager.createShipFromModel(args);
                 case 'listShipModels':
-                    return await this.shipModelManager.listShipModels(); // Return the response
+                    return await this.shipModelManager.listShipModels();
                 case 'deleteShip':
-                    return await this.shipManager.deleteShip(args); // Return the response
+                    if (args.length < 1) return 'Usage: deleteShip <id>';
+                    return await this.shipManager.deleteShip(args);
                 case 'deleteFleet':
-                    return await this.fleetManager.deleteFleet(args); // Return the response
+                    if (args.length < 1) return 'Usage: deleteFleet <id>';
+                    return await this.fleetManager.deleteFleet(args);
                 case 'deleteModel':
-                    return await this.shipModelManager.deleteModel(args); // Return the response
+                    if (args.length < 1) return 'Usage: deleteModel <id>';
+                    return await this.shipModelManager.deleteModel(args);
                 case 'start':
-                    return await this.start(); // Return the logo
+                    return await this.start();
                 case 'help':
-                    return await this.help(); // Return the help response
+                    return await this.help();
                 default:
-                    return 'Unknown command: ' + cmd; // Return unknown command message
+                    return 'Unknown command: ' + cmd;
             }
         } catch (error) {
-            return 'Error handling command: ' + error.message; // Return error message
+            return 'Error handling command: ' + error.message;
         }
     }
 
     async fetch(args) {
         const id = args[0];
-        const type = args[1]; // Optional to distinguish between ship or fleet
+        const type = args[1];
 
         try {
             let data;
@@ -65,9 +88,9 @@ class CommandHandler {
             } else {
                 data = await this.shipManager.fetchShip(id);
             }
-            return 'Fetched data: ' + JSON.stringify(data); // Return fetched data
+            return data;
         } catch (error) {
-            return 'Error fetching data: ' + error.message; // Return error message
+            return 'Error fetching data: ' + error.message;
         }
     }
 
@@ -77,11 +100,12 @@ class CommandHandler {
             '../public/assets/ascii/galacta_logo.txt'
         );
         const logo = fs.readFileSync(filePath, 'utf8');
-        return logo; // Return logo content
+        return logo;
     }
 
     async help() {
         const response = `Available commands:
+        createFleet <name> <general> <maxCapacity>
         createShip <name> <type> <fleetId> <modelId>
         listShips
         listFleets
@@ -97,7 +121,7 @@ class CommandHandler {
         deleteModel <id>
         start
         help`;
-        return response; // Return help information
+        return response;
     }
 }
 
