@@ -5,7 +5,6 @@ class ShipModel extends Model {}
 
 ShipModel.init(
     {
-        // Define the same fields as Ship but without the ID and codeId
         name: {
             type: DataTypes.STRING,
             allowNull: false,

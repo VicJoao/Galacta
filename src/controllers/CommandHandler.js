@@ -44,7 +44,7 @@ class CommandHandler {
                     return await this.fleetManager.updateFleet(args);
                 case 'createShipModel':
                     if (args.length < 6)
-                        return 'Usage: createShipModel <name> <type> <frontalShield> <lateralLeftShield> <lateralRightShield> <backShield> <shieldType>';
+                        return 'Usage: createShipModel <name> <type> <capacity> <maxSpeed> <frontalShield> <lateralLeftShield> <lateralRightShield> <backShield> <shieldType> [weaponSystems]';
                     return await this.shipModelManager.createShipModel(args);
                 case 'updateShipModel':
                     if (args.length < 3)
@@ -114,7 +114,7 @@ class CommandHandler {
         updateFleet <id> <attribute> <value>
         createShipModel <name> <type> <frontalShield> <lateralLeftShield> <lateralRightShield> <backShield> <shieldType>
         updateShipModel <id> <attribute> <value>
-        createShipFromModel <name> <fleetId> <modelId>
+        createShipModel <name> <type> <capacity> <maxSpeed> <frontalShield> <lateralLeftShield> <lateralRightShield> <backShield> <shieldType> [weaponSystems]
         listShipModels
         deleteShip <id>
         deleteFleet <id>

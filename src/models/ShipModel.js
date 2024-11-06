@@ -29,10 +29,6 @@ ShipModel.init(
             ),
             allowNull: false,
         },
-        weaponSystems: {
-            type: DataTypes.STRING,
-            allowNull: true,
-        },
         frontalShield: {
             type: DataTypes.INTEGER,
             allowNull: false,
@@ -68,6 +64,10 @@ ShipModel.init(
         shieldType: {
             type: DataTypes.STRING,
             allowNull: false,
+        },
+        weaponSystems: {
+            type: DataTypes.STRING,
+            allowNull: true,
         },
     },
     {
