@@ -4,58 +4,99 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Galacta Terminal</title>
+        <!-- Tailwind CSS CDN -->
+        <script src="https://cdn.tailwindcss.com"></script>
         <style>
+            /* Custom styles to retain the terminal look */
             body {
                 font-family: monospace;
                 background-color: black;
                 color: white;
                 padding: 20px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                flex-direction: column;
+                text-align: center;
+                text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00,
+                    0 0 30px #00ff00; /* Glowing green for all text */
             }
             h1,
-            h3 {
-                color: #00ff00; /* Green color for terminal style */
-            }
-            input {
-                width: 300px;
-                margin-right: 10px;
-            }
+            h3,
+            p,
             button {
-                padding: 5px 10px;
-                background-color: #005500;
-                color: white;
-                border: none;
-                cursor: pointer;
-            }
-            button:hover {
-                background-color: #007700;
+                text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00,
+                    0 0 30px #00ff00; /* Glowing green for headings, text, and buttons */
             }
             #output {
                 white-space: pre;
                 line-height: 0.9;
                 height: 400px;
-                overflow-y: scroll;
+                width: 100%;
+                text-align: left;
+                justify-content: flex-start;
+                overflow: scroll;
+                color: #00ff00; /* Green text for output */
+                text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00,
+                    0 0 30px #00ff00; /* Glowing green for output */
+            }
+            .form-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 10px;
+                margin-top: 20px;
+            }
+            input,
+            button {
+                text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00; /* Glowing green for form elements */
+            }
+            .glowing-button {
+                text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00,
+                    0 0 30px #00ff00; /* Glowing green for buttons */
             }
         </style>
     </head>
-    <body>
-        <h1>Galacta Terminal</h1>
-        <p>
+    <body class="bg-black text-white p-6">
+        <h1 class="text-4xl text-green-500">Galacta Terminal</h1>
+        <p class="text-lg mt-4">
             Galacta Terminal is a simple terminal emulator that allows you to
             run commands on a remote server.
         </p>
-        <button onclick="redirectToManual()">Manual</button>
+        <button
+            onclick="redirectToManual()"
+            class="mt-4 px-4 py-2 bg-green-700 text-white rounded hover:bg-green-600 glowing-button"
+        >
+            Manual
+        </button>
 
-        <p id="output"></p>
-        <form action="/run" method="post">
-            <input
-                type="text"
-                name="command"
-                id="command"
-                placeholder="Enter a command"
-            />
-            <button type="submit">Run</button>
-            <button type="button" onclick="clearOutput()">Clear</button>
-        </form>
+        <p id="output" class="mt-4"></p>
+
+        <div class="form-container">
+            <form action="/run" method="post" class="flex gap-2">
+                <input
+                    type="text"
+                    name="command"
+                    id="command"
+                    placeholder="Enter a command"
+                    class="px-4 py-2 w-72 bg-gray-800 text-white border border-gray-600 rounded-l glowing-button"
+                />
+                <button
+                    type="submit"
+                    class="px-4 py-2 bg-green-700 text-white border-l border-gray-600 rounded-r hover:bg-green-600 glowing-button"
+                >
+                    Run
+                </button>
+                <button
+                    type="button"
+                    onclick="clearOutput()"
+                    class="ml-2 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-500 glowing-button"
+                >
+                    Clear
+                </button>
+            </form>
+        </div>
 
         <script>
             let typingInterval; // Variable to track the typing interval

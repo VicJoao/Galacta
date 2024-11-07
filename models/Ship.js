@@ -1,5 +1,6 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
+const Fleet = require('./Fleet'); // Import the Fleet model
 
 class Ship extends Model {}
 
@@ -76,6 +77,16 @@ Ship.init(
             type: DataTypes.STRING,
             allowNull: false,
         },
+        fleetId: {
+            type: DataTypes.INTEGER,
+            allowNull: false, // A ship can exist without being assigned to a fleet
+            references: {
+                model: 'Fleets', // Name of the related model in the database
+                key: 'id', // Key in the Fleet model
+            },
+            onUpdate: 'CASCADE',
+            onDelete: 'SET NULL', // When a fleet is deleted, the fleetId will be set to NULL
+        },
     },
     {
         sequelize,
@@ -94,5 +105,8 @@ Ship.init(
         },
     }
 );
+
+// Define the relationship
+Ship.belongsTo(Fleet, { foreignKey: 'fleetId' });
 
 module.exports = Ship;

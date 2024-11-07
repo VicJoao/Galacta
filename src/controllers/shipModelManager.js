@@ -166,7 +166,7 @@ class ShipModelManager {
             if (!shipModel)
                 throw new Error(`Ship model with name ${name} not found.`);
             await shipModel.destroy();
-            return { message: `Ship model ${name} deleted.` };
+            return `Ship model ${name} deleted.`;
         } catch (error) {
             console.error(`Error deleting ship model ${name}:`, error);
             throw new Error('Failed to delete ship model.');

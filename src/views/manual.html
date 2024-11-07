@@ -3,20 +3,11 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Terminal Simulator Manual</title>
-        <link rel="stylesheet" href="styles.css" />
-        <!-- Link to a CSS file if needed -->
+        <title>Galacta Terminal Simulator Manual</title>
+        <!-- Tailwind CSS CDN -->
+        <script src="https://cdn.tailwindcss.com"></script>
         <style>
-            body {
-                font-family: Arial, sans-serif;
-                background-color: #f4f4f4;
-                margin: 0;
-                padding: 20px;
-            }
-            h1,
-            h2 {
-                color: #333;
-            }
+            /* Custom styles to adjust the terminal look */
             pre {
                 background-color: #eee;
                 padding: 10px;
@@ -24,19 +15,21 @@
             }
         </style>
     </head>
-    <body>
-        <h1>Terminal Simulator Manual</h1>
+    <body class="bg-gray-100 text-gray-800 p-6">
+        <h1 class="text-4xl font-bold text-gray-900">
+            Galacta Terminal Simulator Manual
+        </h1>
 
-        <p>
-            Welcome to the Terminal Simulator for managing your spaceship fleet!
-            Below you will find a list of commands you can use to interact with
-            the system.
+        <p class="mt-4 text-lg">
+            Welcome to the Galacta Terminal Simulator for managing your
+            spaceship fleet! Below you will find a list of commands you can use
+            to interact with the system.
         </p>
 
-        <h2>Available Commands</h2>
+        <h2 class="text-2xl mt-6">Available Commands</h2>
 
-        <h3>Ship Management</h3>
-        <pre>
+        <h3 class="text-xl font-semibold mt-4">Ship Management</h3>
+        <pre class="mt-2 p-4 bg-gray-200 border-l-4 border-gray-600">
 createShip [fleetID] [arguments]
     - Creates a new ship in the specified fleet.
     - Arguments: name, capacity, maxSpeed, type, weaponSystems, frontalShield, lateralLeftShield, lateralRightShield, backShield, shieldType.
@@ -58,11 +51,10 @@ updateShip [fleetID] [shipID]
 
 deleteShip [shipID]
     - Deletes the specified ship from the system.
-    </pre
-        >
+        </pre>
 
-        <h3>Fleet Management</h3>
-        <pre>
+        <h3 class="text-xl font-semibold mt-4">Fleet Management</h3>
+        <pre class="mt-2 p-4 bg-gray-200 border-l-4 border-gray-600">
 listFleets
     - Lists all fleets with their names, IDs, and generals.
 
@@ -71,11 +63,10 @@ updateFleet [fleetID]
 
 deleteFleet [FleetID]
     - Deletes the specified fleet from the system.
-    </pre
-        >
+        </pre>
 
-        <h3>Ship Model Management</h3>
-        <pre>
+        <h3 class="text-xl font-semibold mt-4">Ship Model Management</h3>
+        <pre class="mt-2 p-4 bg-gray-200 border-l-4 border-gray-600">
 createShipModel [arguments]
     - Creates a new ship model based on the provided arguments.
 
@@ -87,21 +78,19 @@ updateShipModel [arguments]
 
 deleteModel [ModelID]
     - Deletes the specified ship model from the system.
-    </pre
-        >
+        </pre>
 
-        <h2>Usage Examples</h2>
-        <p>Here are a few examples of how to use the commands:</p>
-        <pre>
+        <h2 class="text-2xl mt-6">Usage Examples</h2>
+        <p class="mt-2">Here are a few examples of how to use the commands:</p>
+        <pre class="mt-2 p-4 bg-gray-200 border-l-4 border-gray-600">
 > createShip fleet123 "Battleship" 500 30 "warship" "laser" 30 30 20 20 "energy"
 > listShips -a
 > fetch 123456
 > deleteShip 123456
-    </pre
-        >
+        </pre>
 
-        <h2>Notes</h2>
-        <ul>
+        <h2 class="text-2xl mt-6">Notes</h2>
+        <ul class="mt-2 list-disc pl-6">
             <li>
                 Ensure that all required arguments are provided for each
                 command.
@@ -111,19 +100,20 @@ deleteModel [ModelID]
                 duplicates exist.
             </li>
             <li>
-                Use the <code>fetch</code> command to view details before
-                updating or deleting.
+                Use the
+                <code class="bg-gray-200 px-1 py-0.5 rounded">fetch</code>
+                command to view details before updating or deleting.
             </li>
         </ul>
 
-        <h2>Support</h2>
-        <p>
+        <h2 class="text-2xl mt-6">Support</h2>
+        <p class="mt-2">
             If you encounter any issues or have questions, please refer to the
             documentation or contact support.
         </p>
 
-        <footer>
-            <p>&copy; 2024 Terminal Simulator. All rights reserved.</p>
+        <footer class="mt-6 text-center text-sm text-gray-600">
+            <p>&copy; 2024 Galacta Terminal Simulator. All rights reserved.</p>
         </footer>
     </body>
 </html>
