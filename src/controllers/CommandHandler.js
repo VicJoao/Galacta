@@ -105,21 +105,22 @@ class CommandHandler {
 
     async help() {
         const response = `Available commands:
-        createFleet <name> <general> <maxCapacity>
-        createShip <name> <type> <fleetId> <modelId>
-        listShips
-        listFleets
-        fetch <id> <type>
-        updateShip <id> <attribute> <value>
-        updateFleet <id> <attribute> <value>
-        createShipModel <name> <type> <frontalShield> <lateralLeftShield> <lateralRightShield> <backShield> <shieldType>
-        updateShipModel <id> <attribute> <value>
-        createShipModel <name> <type> <capacity> <maxSpeed> <frontalShield> <lateralLeftShield> <lateralRightShield> <backShield> <shieldType> [weaponSystems]
-        listShipModels
-        deleteShip <id>
-        deleteFleet <id>
-        deleteModel <id>
-        start
+        createFleet <name> <general> <maxCapacity> "create a fleet"
+        listFleets "list all fleets"
+        updateFleet <id> <attribute> <value> "update a fleet by id"
+        deleteFleet <id> "delete a fleet by id"
+
+        createShipModel <name> <type> <capacity> <maxSpeed> <frontalShield> <lateralLeftShield> <lateralRightShield> <backShield> <shieldType> [weaponSystems] "create a ship model"
+        listShipModels "list all ship models"
+        updateShipModel <name> <attribute> <value> "update a ship model by name"
+        deleteModel <id> "delete a ship model by id"
+
+        createShip <name> <type> <fleetId> <modelId> "create a ship"
+        listShips "list all ships"
+        fetch <id> <type> "fetch a ship or fleet by id"
+        updateShip <id> <attribute> <value> "update a ship by id"
+        deleteShip <id> "delete a ship by id"
+        start "show the Galacta logo"
         help`;
         return response;
     }
