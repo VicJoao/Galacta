@@ -4,8 +4,13 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Galacta Terminal</title>
-        <!-- Tailwind CSS CDN -->
-        <script src="https://cdn.tailwindcss.com"></script>
+        <!-- Bootstrap CSS CDN -->
+        <link
+            href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5+5hb7O/2hb6HV/rsMZyy0tAy+tfUlXrCMw1GoKV"
+            crossorigin="anonymous"
+        />
         <style>
             /* Custom styles to retain the terminal look */
             body {
@@ -20,26 +25,38 @@
                 flex-direction: column;
                 text-align: center;
                 text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00,
-                    0 0 30px #00ff00; /* Glowing green for all text */
+                    0 0 30px #00ff00;
             }
             h1,
             h3,
             p,
             button {
                 text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00,
-                    0 0 30px #00ff00; /* Glowing green for headings, text, and buttons */
+                    0 0 30px #00ff00;
+                font-size: large;
+            }
+            button:hover {
+                background-color: #00ff00;
+                color: black;
+                text-shadow: 0 0 15px #00ff00, 0 0 30px #00ff00,
+                    0 0 45px #00ff00;
+                cursor: pointer;
+            }
+            p {
+                font-size: medium;
             }
             #output {
                 white-space: pre;
-                line-height: 0.9;
+                line-height: 1.5;
                 height: 400px;
-                width: 100%;
+                width: 50vw;
                 text-align: left;
                 justify-content: flex-start;
-                overflow: scroll;
-                color: #00ff00; /* Green text for output */
+                overflow-y: scroll;
+                color: #00ff00;
                 text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00,
-                    0 0 30px #00ff00; /* Glowing green for output */
+                    0 0 30px #00ff00;
+                margin: auto;
             }
             .form-container {
                 display: flex;
@@ -47,69 +64,150 @@
                 align-items: center;
                 gap: 10px;
                 margin-top: 20px;
+                width: 100%;
+            }
+            input {
+                width: 50%;
+            }
+            form {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 10px;
+            }
+            input {
+                margin: 10px;
             }
             input,
             button {
-                text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00; /* Glowing green for form elements */
+                text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00;
+                background-color: black;
+                border: 2px solid #00ff00;
+                color: white;
+            }
+            input::placeholder {
+                color: #00ff00;
+            }
+            input:focus,
+            button:focus {
+                outline: none;
+                border-color: #00ff00;
             }
             .glowing-button {
                 text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00,
-                    0 0 30px #00ff00; /* Glowing green for buttons */
+                    0 0 30px #00ff00;
+                background-color: black;
+                border: 2px solid #00ff00;
+                color: white;
             }
             .term-border {
-                border: 2px solid #00ff00; /* Green border for the terminal */
+                border: 2px solid #00ff00;
             }
             .site-box {
                 max-width: 1200px;
                 max-width: 80vw;
+                padding: 0;
                 height: auto;
                 max-height: 80vh;
                 margin: 60px auto;
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                border-radius: 50px;
+            }
+            #terminal-header {
+                border-radius: 50px 0 0 50px;
+                height: 100%;
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                align-items: center;
+            }
+            #terminal-logo {
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+            }
+            #terminal-text {
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+                align-items: center;
+                border-top: 2px solid #00ff00;
+                border-radius: 50px;
+            }
+            #terminal {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                border-left: 2px solid #00ff00;
+                border-radius: 50px;
+                padding: 40px;
+            }
+            .lead {
+                font-size: 1.25rem;
+                text-align: justify;
+                padding: 10px;
+            }
+            .planet-globe {
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+                background: radial-gradient(circle, #00ff00 0%, #000000 100%);
+                box-shadow: 0 0 20px #00ff00, 0 0 40px #00ff00, 0 0 60px #00ff00,
+                    0 0 80px #00ff00, 0 0 100px #00ff00, 0 0 120px #00ff00,
+                    0 0 140px #00ff00, 0 0 160px #00ff00;
             }
         </style>
     </head>
     <body class="site-box term-border mx-auto">
-        <div id="terminal-header" class="term-border">
+        <div id="terminal-header">
+            <span class="planet-globe"></span>
             <div id="terminal-logo">
-                <h1 class="text-4xl text-green-500">Galacta Terminal</h1>
+                <h1 class="display-4 text-success">Galacta Terminal</h1>
             </div>
 
-            <div id="terminal-text" class="term-border">
-                <p class="text-lg mt-4">
+            <div id="terminal-text">
+                <p class="lead">
                     Galacta Terminal is a simple terminal emulator that allows
                     you to run commands on a remote server.
                 </p>
                 <button
                     onclick="redirectToManual()"
-                    class="mt-4 px-4 py-2 bg-green-700 text-white rounded hover:bg-green-600 glowing-button"
+                    class="btn btn-success glowing-button"
                 >
                     Manual
                 </button>
             </div>
         </div>
 
-        <div id="terminal" class="term-border">
+        <div id="terminal">
             <p id="output" class="mt-4"></p>
 
             <div class="form-container">
-                <form action="/run" method="post" class="flex gap-2">
+                <form action="/run" method="post" class="d-flex gap-2">
                     <input
                         type="text"
                         name="command"
                         id="command"
                         placeholder="Enter a command"
-                        class="px-4 py-2 w-72 bg-gray-800 text-white border border-gray-600 rounded-l glowing-button"
+                        class="px-4 py-2 w-100 bg-dark text-white border border-success rounded-start glowing-button"
                     />
                     <button
                         type="submit"
-                        class="px-4 py-2 bg-green-700 text-white border-l border-gray-600 rounded-r hover:bg-green-600 glowing-button"
+                        class="px-4 py-2 btn btn-success glowing-button rounded-end"
                     >
                         Run
                     </button>
                     <button
                         type="button"
                         onclick="clearOutput()"
-                        class="ml-2 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-500 glowing-button"
+                        class="ms-2 px-4 py-2 btn btn-danger glowing-button"
                     >
                         Clear
                     </button>
@@ -117,11 +215,14 @@
             </div>
         </div>
 
-        <script>
-            let typingInterval; // Variable to track the typing interval
-            let index = 0; // Current index for typing effect
+        <!-- Bootstrap JS CDN -->
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/js/bootstrap.min.js"></script>
 
-            // Start the terminal on load
+        <script>
+            let typingInterval;
+            let index = 0;
+
             fetch('/run/start', {
                 method: 'POST',
             })
@@ -135,15 +236,14 @@
                 e.preventDefault();
                 const command = document.querySelector('#command').value;
 
-                // Construct the URL with the command
-                const url = `/run/${encodeURIComponent(command)}`; // Use encodeURIComponent to handle special characters
+                const url = `/run/${encodeURIComponent(command)}`;
 
                 fetch(url, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ command: command }), // Optional, if your server needs the command in the body
+                    body: JSON.stringify({ command: command }),
                 })
                     .then((response) => {
                         if (!response.ok) {
@@ -156,18 +256,17 @@
                     })
                     .catch((error) => {
                         console.error('Error:', error);
-                        appendOutput('Error: ' + error.message); // Add error message to the output
+                        appendOutput('Error: ' + error.message);
                     });
             });
 
             const appendOutput = (output) => {
                 const outputElement = document.querySelector('#output');
                 const newOutput = output;
-                index = 0; // Reset index for the new output
-                outputElement.innerHTML += '\n'; // Add a new line before typing new output
-                typeWriterEffect(newOutput); // Call the typing effect with the new output
+                index = 0;
+                outputElement.innerHTML += '\n';
+                typeWriterEffect(newOutput);
 
-                // Scroll to the bottom of the output area
                 outputElement.scrollTop = outputElement.scrollHeight;
             };
 
@@ -176,22 +275,22 @@
 
                 const typeNextLetter = () => {
                     if (index < newOutput.length) {
-                        outputElement.innerHTML += newOutput.charAt(index); // Append new character
+                        outputElement.innerHTML += newOutput.charAt(index);
                         index++;
-                        typingInterval = setTimeout(typeNextLetter, 0); // Adjust delay for typing effect
+                        typingInterval = setTimeout(typeNextLetter, 0);
                     } else {
-                        outputElement.innerHTML += '\n'; // Add a new line after finishing the typing
+                        outputElement.innerHTML += '\n';
                     }
                 };
 
-                typeNextLetter(); // Start typing effect
+                typeNextLetter();
             };
 
             const clearOutput = () => {
-                clearTimeout(typingInterval); // Stop the typing effect
-                index = 0; // Reset index
+                clearTimeout(typingInterval);
+                index = 0;
                 const outputElement = document.querySelector('#output');
-                outputElement.innerHTML = ''; // Clear the output area
+                outputElement.innerHTML = '';
             };
 
             const redirectToManual = () => {
